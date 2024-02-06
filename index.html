@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Badge verification</title>
+        <script src="verification.js"></script>
+        <script src="conversion.js"></script>
+    </head>
+    <body>
+        <input type="file" id="uploadImage" accept="image/*">
+        <button id="verifyImage">Verify Image</button>
+        <button id="convertImage">Convert image</button>
+        <script>
+            document.getElementById('verifyImage').onclick = function() {
+                const file = document.getElementById('uploadImage').files[0];
+                if (file) {
+                    verifyImage(file).then(alert).catch(alert);
+                }
+            };
+
+            document.getElementById('convertImage').onclick = function() {
+                const file = document.getElementById('uploadImage').files[0];
+                if (file) {
+                    convertToCircleAvatar(file, function(blob) {
+                    const img = document.createElement('img');
+                    img.src = URL.createObjectURL(blob);
+                    document.body.appendChild(img);
+                    });
+                }
+            };
+        </script>
+    </body>
+</html>
